@@ -1,31 +1,26 @@
 {
-  "name": "SushiToken",
-  "address": "0xe1be93112e38c9441f51fea07b6b301a622ec0eb",
+  "name": "WETH",
+  "address": "0xd9145CCE52D386f254917e481eB44e9943F39138",
   "abi": [
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
     {
       "anonymous": false,
       "inputs": [
         {
           "indexed": true,
           "internalType": "address",
-          "name": "owner",
+          "name": "src",
           "type": "address"
         },
         {
           "indexed": true,
           "internalType": "address",
-          "name": "spender",
+          "name": "guy",
           "type": "address"
         },
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "value",
+          "name": "wad",
           "type": "uint256"
         }
       ],
@@ -41,7 +36,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "value",
+          "name": "wad",
           "type": "uint256"
         }
       ],
@@ -57,63 +52,41 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
       "inputs": [
         {
+          "indexed": true,
           "internalType": "address",
-          "name": "spender",
+          "name": "dst",
           "type": "address"
         },
         {
+          "indexed": false,
           "internalType": "uint256",
-          "name": "subtractedValue",
+          "name": "wad",
           "type": "uint256"
         }
       ],
-      "name": "decreaseAllowance",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "name": "Deposit",
+      "type": "event"
     },
     {
       "inputs": [
         {
           "internalType": "address",
-          "name": "spender",
+          "name": "dst",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "addedValue",
-          "type": "uint256"
-        }
-      ],
-      "name": "increaseAllowance",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "value",
+          "name": "wad",
           "type": "uint256"
         }
       ],
@@ -134,19 +107,19 @@
         {
           "indexed": true,
           "internalType": "address",
-          "name": "from",
+          "name": "src",
           "type": "address"
         },
         {
           "indexed": true,
           "internalType": "address",
-          "name": "to",
+          "name": "dst",
           "type": "address"
         },
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "value",
+          "name": "wad",
           "type": "uint256"
         }
       ],
@@ -157,17 +130,17 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "from",
+          "name": "src",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "to",
+          "name": "dst",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "value",
+          "name": "wad",
           "type": "uint256"
         }
       ],
@@ -183,28 +156,51 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "_totalSupply",
-      "outputs": [
+      "inputs": [
         {
           "internalType": "uint256",
-          "name": "",
+          "name": "wad",
           "type": "uint256"
         }
       ],
-      "stateMutability": "view",
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "src",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "wad",
+          "type": "uint256"
+        }
+      ],
+      "name": "Withdrawal",
+      "type": "event"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
     },
     {
       "inputs": [
         {
           "internalType": "address",
-          "name": "owner",
+          "name": "",
           "type": "address"
         },
         {
           "internalType": "address",
-          "name": "spender",
+          "name": "",
           "type": "address"
         }
       ],
@@ -223,7 +219,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "owner",
+          "name": "",
           "type": "address"
         }
       ],
@@ -287,10 +283,10 @@
           "type": "uint256"
         }
       ],
-      "stateMutability": "pure",
+      "stateMutability": "view",
       "type": "function"
     }
   ],
-  "filePath": "DeFi-1716323105319/project/MyToken.sol",
-  "pinnedAt": 1716326519095
+  "filePath": "DeFi-1716323105319/project/WETH.sol",
+  "pinnedAt": 1716466247314
 }

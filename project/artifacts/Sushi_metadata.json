@@ -308,43 +308,23 @@
 			}
 		],
 		"devdoc": {
-			"events": {
-				"Approval(address,address,uint256)": {
-					"details": "Emitted when the allowance of a `spender` for an `owner` is set by a call to {approve}. `value` is the new allowance."
-				},
-				"Transfer(address,address,uint256)": {
-					"details": "Emitted when `value` tokens are moved from one account (`from`) to another (`to`). Note that `value` may be zero."
-				}
-			},
 			"kind": "dev",
-			"methods": {
-				"allowance(address,address)": {
-					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
-				},
-				"approve(address,uint256)": {
-					"details": "Sets a `value` amount of tokens as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
-				},
-				"totalSupply()": {
-					"details": "Returns the value of tokens in existence."
-				},
-				"transfer(address,uint256)": {
-					"details": "Moves a `value` amount of tokens from the caller's account to `to`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
-				},
-				"transferFrom(address,address,uint256)": {
-					"details": "Moves a `value` amount of tokens from `from` to `to` using the allowance mechanism. `value` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"allowance(address,address)": {
+					"notice": "Function to check the amount of tokens that an owner allowed to a spender."
+				}
+			},
 			"version": 1
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"project/MyToken.sol": "SushiToken"
+			"project/newToken.sol": "Sushi"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -358,28 +338,28 @@
 		"remappings": []
 	},
 	"sources": {
-		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-			"keccak256": "0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70",
-			"license": "MIT",
+		"project/interfaces/IERC20.sol": {
+			"keccak256": "0xde8f53784d35b3b2803d25bb4eeada0a6cb96d943e68c4627dfa536275b85779",
+			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://0ea104e577e63faea3b69c415637e99e755dcbf64c5833d7140c35a714d6d90c",
-				"dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq"
+				"bzz-raw://591211f07e903b1185c170c7fe60a7919b46425546de22dc0886c37f28ffa6bb",
+				"dweb:/ipfs/QmVKWeQ9eQ4whiVVPtB68ffSJBjUSt4d7ypv5k8djJrkGe"
 			]
 		},
-		"@openzeppelin/contracts/utils/math/SafeMath.sol": {
-			"keccak256": "0x58b21219689909c4f8339af00813760337f7e2e7f169a97fe49e2896dcfb3b9a",
-			"license": "MIT",
+		"project/libraries/SafeMath.sol": {
+			"keccak256": "0xc623aa57808b3bc4b6e25fc4899f8fd1a47e2ef0ec668780db27badef81971cc",
+			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://ef8e012e946dec20e59f2d4446f4b44bb098f3fa8bac103b1b5112fff777447b",
-				"dweb:/ipfs/QmVTooKWcLkJ9W68yNX4MgdrbAKiAXwuRN9A7f4NkdcdtQ"
+				"bzz-raw://458258f7506d21d850c546910c209f7eb7f10e518361f79e595820251d256bf6",
+				"dweb:/ipfs/QmNU5w9P3fAmtCtt4jXie1WFwBQFWzzeNjQyESkRok9CtD"
 			]
 		},
-		"project/MyToken.sol": {
-			"keccak256": "0x3e32fd57319200290e5db7441990102afeacd868ca8577bee40a4e3b87e92b4c",
-			"license": "MIT",
+		"project/newToken.sol": {
+			"keccak256": "0x0005ae7b1a5f924ecf4f8df29f37989683cdbe039e3657ccdb814205633e7f94",
+			"license": "XXX",
 			"urls": [
-				"bzz-raw://e23fd5630229c4a652ed70f8d572cb90158588e008c868620c809f5daf375f52",
-				"dweb:/ipfs/QmQmGMA67phvrTAJwgwQ93Gn7WqdWRpLaDJSz1vMftxx52"
+				"bzz-raw://9e208a38383517e4b0f124f358cbfb10ae328d48bc4d1fb65fdedd9cdd84d931",
+				"dweb:/ipfs/QmVLv7gnCwYwB1XcS9yofD8gmgsAMXWxxKFxYKgAF4u66K"
 			]
 		}
 	},

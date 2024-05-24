@@ -1,0 +1,96 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_router",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "approveToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "router",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"project/Approve.sol": "ApproveTokens"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"project/Approve.sol": {
+			"keccak256": "0xbcdeb0d336e25ae983d809f80f33838618ee1917ed13f0a2fa4b986a7857b1cc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://94817a99f1a5fa3acfbece8e1dd6e20d3c2928c938f4938359bc65eae5be08bb",
+				"dweb:/ipfs/QmQ4BZhUzEYEXQGjYEPVu7j8YLXmfEWWAzkxQnwpQoRSE6"
+			]
+		},
+		"project/interfaces/IERC20.sol": {
+			"keccak256": "0xde8f53784d35b3b2803d25bb4eeada0a6cb96d943e68c4627dfa536275b85779",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://591211f07e903b1185c170c7fe60a7919b46425546de22dc0886c37f28ffa6bb",
+				"dweb:/ipfs/QmVKWeQ9eQ4whiVVPtB68ffSJBjUSt4d7ypv5k8djJrkGe"
+			]
+		}
+	},
+	"version": 1
+}

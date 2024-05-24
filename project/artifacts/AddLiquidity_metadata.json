@@ -1,0 +1,214 @@
+{
+	"compiler": {
+		"version": "0.8.25+commit.b61c2a91"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_router",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_sushiToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_weth",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_defiToken",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "sushiAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "wethAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "sushiMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "wethMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "addLiquidity",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "sushiAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defiAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "sushiMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "defiMin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					}
+				],
+				"name": "addLiquidityWithDefi",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "defiToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "router",
+				"outputs": [
+					{
+						"internalType": "contract IUniswapV2Router01",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sushiToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "weth",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"project/AddLiquidity.sol": "AddLiquidity"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"project/AddLiquidity.sol": {
+			"keccak256": "0x52ea8c2476dba119bec7b7af2f647f321ffc40868a10a9854c59d02d8b47dd64",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://934c9e34accba727bbc9954c5fba6c0f457c617febfe2f0a6eea62817de388ac",
+				"dweb:/ipfs/QmTYT8itijDyVD36aZQ973ywbfDEPV9CouMzrHb85T1jQH"
+			]
+		},
+		"project/interfaces/IERC20.sol": {
+			"keccak256": "0xde8f53784d35b3b2803d25bb4eeada0a6cb96d943e68c4627dfa536275b85779",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://591211f07e903b1185c170c7fe60a7919b46425546de22dc0886c37f28ffa6bb",
+				"dweb:/ipfs/QmVKWeQ9eQ4whiVVPtB68ffSJBjUSt4d7ypv5k8djJrkGe"
+			]
+		},
+		"project/interfaces/IRouter.sol": {
+			"keccak256": "0x79f5dad43f237507241567b9ba45ed55bf06c39e7d4284234f6ff1a23be3c2e1",
+			"license": "XXX",
+			"urls": [
+				"bzz-raw://a806bb36374e04944cf51993baf8beada8c1a147be627721a895b18023dbb141",
+				"dweb:/ipfs/QmbUigmqKYvpsMt9Kbcxb26TNSaxnXJa1y8YCP5i8Awvi6"
+			]
+		},
+		"project/interfaces/IWETH.sol": {
+			"keccak256": "0x972e1911758169ec6910382b042b202f5b7d9c99f355c651b42a5b7659dd5580",
+			"license": "XXX",
+			"urls": [
+				"bzz-raw://6d94ce2172daba47a989bf2ac0e4659701d0c577051cbb2ef9fd9f76b1fcbde2",
+				"dweb:/ipfs/QmUKSMdjMxZzsohCgzuQXBbDxMrKDiUPeTHCT3QQRKLhif"
+			]
+		}
+	},
+	"version": 1
+}

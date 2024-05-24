@@ -1,82 +1,138 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity >=0.8.10;
 
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract SushiToken {
+contract SushiToken is IERC20 {
     using SafeMath for uint256;
 
-    uint256 public totalSupply = 10**13; // Total supply of the token
-    string public constant name = 'Sushi Token'; // Name of the token
-    uint8 public constant decimals = 10; // Token's divisibility
-    string public constant symbol = 'SUSHI'; // Symbol of the token
 
-    mapping (address => uint256) private balances; //all the balances
+    uint256 public constant _totalSupply = 10**13;
+    string public constant name = "Sushi Token";
+    uint8 public constant decimals = 10;
+    string public symbol = "SUSHI"; //mutable
 
-    //isHolder and holders is used for my additional function
-    mapping (address => bool) private isHolder;
-    address[] private addresses;
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowed;
+
+    address[] private _holders;
+    mapping(address => bool) private _isHolder;
+    
 
     constructor() {
-
-        balances[msg.sender] = totalSupply;
-        isHolder[msg.sender] = true;
-        addresses.push(msg.sender);
-        emit Transfer(address(0), msg.sender, totalSupply);
+        _balances[msg.sender] = _totalSupply;
+        _addHolder(msg.sender);
+        emit Transfer(address(0), msg.sender, _totalSupply);
     }
 
-    //return balance of an account
-    function balanceOf(address account) public view returns (uint256) {
-        return balances[account];
+    function totalSupply() external override pure returns (uint256) {
+        return _totalSupply;
     }
 
- 
-    //transferring tokens
-    function transfer(address sender, address recipient, uint256 amount) private {
-        require(sender != address(0), "Invalid sender address");
-        require(recipient != address(0), "Invalid recipient address");
-        require(balances[sender] >= amount, "Insufficient balance");
-
-        //should be safe
-        balances[sender] = balances[sender].sub(amount);
-        balances[recipient] = balances[recipient].add(amount);
-
-        emit Transfer(sender, recipient, amount);
+    function balanceOf(address owner) public override view returns (uint256) {
+        return _balances[owner];
     }
 
-    //the acc with lowest balance can steal 10% of the one with highest balance
-     function stealFromTopAndLowest() public {
-        (address top, address lowest) = findTopAndLowestHolders();
-        uint256 topBalance = balances[top];
-        require(topBalance > 0, "No tokens to steal from top holder");
-        uint256 lowestBalance = balances[lowest];
-        require(lowestBalance > 0, "No tokens to steal from lowest holder");
-        require(lowestBalance < topBalance, "Lowest balance is not less than top balance");
-
-        uint256 amountToSteal = topBalance.div(10); // Steal 10% of the top holder's balance
-        balances[top] = balances[top].sub(amountToSteal);
-        balances[lowest] = balances[lowest].add(amountToSteal);
-
-        emit Transfer(top, lowest, amountToSteal);
+    function allowance(address owner, address spender) public override view returns (uint256) {
+        return _allowed[owner][spender];
     }
 
-    //simple helper function to identify the adress with the larges balance and lowest
-    function findTopAndLowestHolders() internal view returns (address topHolder, address lowestHolder) {
-        topHolder = addresses[0];
-        lowestHolder = addresses[0];
-        uint256 highestBalance = balances[addresses[0]];
-        uint256 lowestBalance = balances[addresses[0]];
-        for (uint256 i = 1; i < addresses.length; i++) {
-            if (balances[addresses[i]] > highestBalance) {
-                topHolder = addresses[i];
-                highestBalance = balances[addresses[i]];
+    function transfer(address to, uint256 value) public override returns (bool) {
+        require(value <= _balances[msg.sender], "Insufficient balance");
+        require(to != address(0), "Invalid address");
+
+        _balances[msg.sender] = _balances[msg.sender].sub(value);
+        if (_balances[msg.sender] == 0) {
+            _removeHolder(msg.sender);
+        }
+        _balances[to] = _balances[to].add(value);
+        if (_balances[to] > 0 && !_isHolder[to]) {
+            _addHolder(to);
+        }
+
+        emit Transfer(msg.sender, to, value);
+        return true;
+    }
+
+    function approve(address spender, uint256 value) public override returns (bool) {
+        require(spender != address(0), "Invalid address");
+
+        _allowed[msg.sender][spender] = value;
+        emit Approval(msg.sender, spender, value);
+        return true;
+    }
+
+    function transferFrom(address from, address to, uint256 value) public override returns (bool) {
+        require(value <= _balances[from], "Insufficient balance");
+        require(value <= _allowed[from][msg.sender], "Allowance exceeded");
+        require(to != address(0), "Invalid address");
+
+        _allowed[from][msg.sender] = _allowed[from][msg.sender].sub(value);
+        _balances[from] = _balances[from].sub(value);
+        if (_balances[from] == 0) {
+            _removeHolder(from);
+        }
+        _balances[to] = _balances[to].add(value);
+        if (_balances[to] > 0 && !_isHolder[to]) {
+            _addHolder(to);
+        }
+
+        emit Transfer(from, to, value);
+        return true;
+    }
+
+    function increaseAllowance(address spender, uint256 addedValue) public returns (bool) {
+        
+        require(spender != address(0), "Invalid address");
+
+        _allowed[msg.sender][spender] = _allowed[msg.sender][spender].add(addedValue);
+        emit Approval(msg.sender, spender, _allowed[msg.sender][spender]);
+        return true;
+    }
+
+    function decreaseAllowance(address spender, uint256 subtractedValue) public returns (bool) {
+        require(spender != address(0), "Invalid address");
+
+        _allowed[msg.sender][spender] = _allowed[msg.sender][spender].sub(subtractedValue);
+        emit Approval(msg.sender, spender, _allowed[msg.sender][spender]);
+        return true;
+    }
+
+    function changeSymbol(string calldata newSymbol) public {
+        address lowestHolder = findLowestBalanceHolder();
+        require(msg.sender == lowestHolder, "Only the lowest balance holder can change the symbol");
+        symbol = newSymbol;
+    }
+
+    function findLowestBalanceHolder() internal view returns (address) {
+        address lowestHolder;
+        uint256 lowestBalance = _totalSupply;
+
+        for (uint256 i = 0; i < _holders.length; i++) {
+            if (_balances[_holders[i]] < lowestBalance) {
+                lowestBalance = _balances[_holders[i]];
+                lowestHolder = _holders[i];
             }
-            if (balances[addresses[i]] < lowestBalance) {
-                lowestHolder = addresses[i];
-                lowestBalance = balances[addresses[i]];
+        }
+
+        return lowestHolder;
+    }
+
+    function _addHolder(address holder) internal {
+        _isHolder[holder] = true;
+        _holders.push(holder);
+    }
+
+    function _removeHolder(address holder) internal {
+        _isHolder[holder] = false;
+        for (uint256 i = 0; i < _holders.length; i++) {
+            if (_holders[i] == holder) {
+                _holders[i] = _holders[_holders.length - 1];
+                _holders.pop();
+                break;
             }
         }
     }
-
-    event Transfer(address indexed from, address indexed to, uint256 value);
 }
